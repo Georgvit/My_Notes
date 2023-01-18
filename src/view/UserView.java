@@ -1,14 +1,22 @@
 package view;
 
+import controllers.UserController;
 import model.Notes;
+import model.NotesBook;
 
 import java.util.Date;
 import java.util.Scanner;
 
 public class UserView {
+    private UserController userController;
+
+    public UserView(UserController userController) {
+        this.userController = userController;
+    }
 
     UserCommands command;
 
+    //    Запуск программы
     public void run() {
         while (true) {
             greeting();
@@ -19,15 +27,17 @@ public class UserView {
                 case CREATE:
                     String topic = userInputComand("Введите тему записи:");
                     String text = userInputComand("Введите текси записи:");
-                    System.out.println(new Notes(new Date(),topic, text));
-
-
+                    String date = new Date().toString();
+                    Notes notes = new Notes(date, topic, text);
+                    userController.saveNote(notes);
+                    break;
             }
 
         }
 
     }
 
+    //    Меню с подсказками команд
     private void greeting() {
         System.out.println("\nСписок команд записной книги:");
         System.out.println(UserCommands.CREATE + " - создание новой записи. \n" +
@@ -38,6 +48,7 @@ public class UserView {
                 UserCommands.EXIT + " - выход из программы. \n");
     }
 
+    //    Метод пользовательского ввода
     private String userInputComand(String message) {
         Scanner in = new Scanner(System.in);
         System.out.println(message);

@@ -1,21 +1,23 @@
 package model;
 
 
-import java.util.Date;
-
 public class Notes {
+    //    id записи
     private String id = "";
-    private Date date = new Date();
+    //    Дата создания записи
+    private String date;
+    //    Заголовок записи
     private String topic;
+    //    Текст записи
     private String text;
 
-    public Notes(Date date, String topic, String text) {
+    public Notes(String date, String topic, String text) {
         this.date = date;
         this.topic = topic;
         this.text = text;
     }
 
-    public Notes(String id, Date date, String topic, String text) {
+    public Notes(String id, String date, String topic, String text) {
         this(date, topic, text);
         this.id = id;
     }
@@ -28,7 +30,7 @@ public class Notes {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
