@@ -1,20 +1,23 @@
 package model;
 
+
+import java.util.Date;
+
 public class Notes {
     private String id = "";
-    private String data;
+    private Date date = new Date();
     private String topic;
     private String text;
 
-    public Notes(String topic, String text) {
+    public Notes(Date date, String topic, String text) {
+        this.date = date;
         this.topic = topic;
         this.text = text;
     }
 
-    public Notes(String id, String data, String topic, String text) {
-        this(topic, text);
+    public Notes(String id, Date date, String topic, String text) {
+        this(date, topic, text);
         this.id = id;
-        this.data = data;
     }
 
     public String getId() {
@@ -25,12 +28,8 @@ public class Notes {
         this.id = id;
     }
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
+    public Date getDate() {
+        return date;
     }
 
     public String getTopic() {
@@ -51,6 +50,6 @@ public class Notes {
 
     @Override
     public String toString() {
-        return String.format("ID: %s\nДата: %s\nТема записи: %s\nТекст записи: %s\n",id,data,topic,text);
+        return String.format("ID: %s\nДата: %s\nТема записи: %s\nТекст записи: %s\n", id, date, topic, text);
     }
 }
