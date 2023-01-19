@@ -11,6 +11,10 @@ public class Notes {
     //    Текст записи
     private String text;
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public Notes(String date, String topic, String text) {
         this.date = date;
         this.topic = topic;
