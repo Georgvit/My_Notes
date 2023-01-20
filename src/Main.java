@@ -1,11 +1,11 @@
-import controllers.UserController;
+import controllers.NotesController;
 import model.FormatFile;
-import view.UserView;
+import view.NotesView;
 
 public class Main {
     public static void main(String[] args) {
-        UserController userController = new UserController(new FormatFile().formatNoteFile());
+        NotesController userController = new NotesController(new FormatFile().formatNoteFile());
 //        Запуск программы, вызов пользовательского меню
-        new UserView(userController).run();
+        new NotesView(userController).run();
     }
 }

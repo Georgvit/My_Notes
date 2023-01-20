@@ -1,28 +1,28 @@
 package view;
 
-import controllers.UserController;
+import controllers.NotesController;
 import model.Notes;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class UserView {
-    private UserController userController;
+public class NotesView {
+    private NotesController userController;
 
-    public UserView(UserController userController) {
+    public NotesView(NotesController userController) {
         this.userController = userController;
     }
 
-    UserCommands command;
+    NotesCommands command;
 
     //    Запуск программы
     public void run() {
         while (true) {
             greeting();
             String inputComand = userInputComand("Введите команду");
-            command = UserCommands.valueOf(inputComand.toUpperCase());
-            if (command == UserCommands.EXIT) return;
+            command = NotesCommands.valueOf(inputComand.toUpperCase());
+            if (command == NotesCommands.EXIT) return;
             switch (command) {
                 case CREATE:
                     String topic = userInputComand("Введите тему записи:");
@@ -95,12 +95,12 @@ public class UserView {
     //    Меню с подсказками команд
     private void greeting() {
         System.out.println("\nСписок команд записной книги:");
-        System.out.println(UserCommands.CREATE + " - создание новой записи. \n" +
-                UserCommands.READ + " - чтение записи по ID. \n" +
-                UserCommands.UPDATE + " - обновление записи. \n" +
-                UserCommands.LIST + " - вывод всех записей. \n" +
-                UserCommands.DELETE + " - удаление записей. \n" +
-                UserCommands.EXIT + " - выход из программы. \n");
+        System.out.println(NotesCommands.CREATE + " - создание новой записи. \n" +
+                NotesCommands.READ + " - чтение записи по ID. \n" +
+                NotesCommands.UPDATE + " - обновление записи. \n" +
+                NotesCommands.LIST + " - вывод всех записей. \n" +
+                NotesCommands.DELETE + " - удаление записей. \n" +
+                NotesCommands.EXIT + " - выход из программы. \n");
     }
 
     //    Метод пользовательского ввода

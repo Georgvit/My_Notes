@@ -1,7 +1,7 @@
 package view;
 
 //Комманды управления программой
-public enum UserCommands {
+public enum NotesCommands {
     CREATE,
     READ, UPDATE, LIST, DELETE, EXIT
 }

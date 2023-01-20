@@ -5,10 +5,10 @@ import model.Repository;
 
 import java.util.List;
 
-public class UserController {
+public class NotesController {
     private final Repository repository;
 
-    public UserController(Repository repository) {
+    public NotesController(Repository repository) {
         this.repository = repository;
     }
 
