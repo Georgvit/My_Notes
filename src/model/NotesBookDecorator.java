@@ -3,34 +3,20 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotesBook implements Repository {
-    private final DataOperations dataOperations;
-    private final FormatLine formatLine;
-    public DataOperations getDataOperations() {
-        return dataOperations;
-    }
+//Создаем декоратор, переопределяем методы с добавлением логирования.
+public class NotesBookDecorator implements Repository {
+    NotesBook notesBook;
 
-    public FormatLine getFormatLine() {
-        return formatLine;
-    }
+    private MyLogger myLogger;
 
-    public NotesBook(DataOperations dataOperations, FormatLine formatLine) {
-        this.dataOperations = dataOperations;
-        this.formatLine = formatLine;
-    }
-
-    @Override
-    public List<Notes> getAllNote() {
-        List<String> lines = dataOperations.readAllLines();
-        List<Notes> notes = new ArrayList<>();
-        for (String line : lines) {
-            notes.add(formatLine.fl(line));
-        }
-        return notes;
+    public NotesBookDecorator(NotesBook notesBook, MyLogger myLogger) {
+        this.notesBook = notesBook;
+        this.myLogger = myLogger;
     }
 
     @Override
     public void createNotesBook(Notes notes) {
+        myLogger.myLog().info("Создание новой записи в записной книге");
         List<Notes> notes1 = getAllNote();
         int max = 0;
         for (Notes item : notes1) {
@@ -50,17 +36,28 @@ public class NotesBook implements Repository {
             notes1.add(notes);
             List<String> lines = new ArrayList<>();
             for (Notes item : notes1) {
-                lines.add(formatLine.fl(item));
+                lines.add(notesBook.getFormatLine().fl(item));
             }
 
-            dataOperations.saveAllLines(lines);
+            notesBook.getDataOperations().saveAllLines(lines);
         }
-
 
     }
 
     @Override
+    public List<Notes> getAllNote() {
+
+        List<String> lines = notesBook.getDataOperations().readAllLines();
+        List<Notes> notes = new ArrayList<>();
+        for (String line : lines) {
+            notes.add(notesBook.getFormatLine().fl(line));
+        }
+        return notes;
+    }
+
+    @Override
     public void updateNote(Notes notes, String idNote) {
+        myLogger.myLog().info("Обновление записи в записной книге");
         int idNotes = Integer.parseInt(idNote);
         notes.setId(idNote);
         List<Notes> allNote = getAllNote();
@@ -72,19 +69,21 @@ public class NotesBook implements Repository {
         }
         List<String> lines = new ArrayList<>();
         for (Notes item : allNote) {
-            lines.add(formatLine.fl(item));
+            lines.add(notesBook.getFormatLine().fl(item));
         }
-        dataOperations.saveAllLines(lines);
+        notesBook.getDataOperations().saveAllLines(lines);
     }
 
     @Override
     public void deleteAllNotes() {
+        myLogger.myLog().info("Удаление всех записей из книги");
         List<String> lines = new ArrayList<>();
-        dataOperations.saveAllLines(lines);
+        notesBook.getDataOperations().saveAllLines(lines);
     }
 
     @Override
     public void deleteSelectionNotes(String idNote) {
+        myLogger.myLog().info("Выборочное удаление записей из книги");
         int idNotes = Integer.parseInt(idNote);
         List<Notes> allNote = getAllNote();
         for (int i = 0; i < allNote.size(); i++) {
@@ -95,8 +94,8 @@ public class NotesBook implements Repository {
 
         List<String> lines = new ArrayList<>();
         for (Notes item : allNote) {
-            lines.add(formatLine.fl(item));
+            lines.add(notesBook.getFormatLine().fl(item));
         }
-        dataOperations.saveAllLines(lines);
+        notesBook.getDataOperations().saveAllLines(lines);
     }
 }

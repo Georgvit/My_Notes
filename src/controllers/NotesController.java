@@ -13,15 +13,15 @@ public class NotesController {
     }
 
     public void saveNote(Notes notes){
-        repository.CreateNotesBook(notes);
+        repository.createNotesBook(notes);
     }
 
     public void updateSaveNote(Notes notes, String id){
-        repository.UpdateNote(notes, id);
+        repository.updateNote(notes, id);
     }
 
     public void deleteSelectionDate(String idNote){
-        repository.DeleteSelectionNotes(idNote);
+        repository.deleteSelectionNotes(idNote);
         System.out.println("Запись удалена");
     }
 

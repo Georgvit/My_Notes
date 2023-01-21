@@ -3,11 +3,11 @@ package model;
 import java.util.List;
 
 public interface Repository {
-    void CreateNotesBook (Notes notes);
+    void createNotesBook(Notes notes);
     List<Notes> getAllNote();
 
-    void UpdateNote(Notes notes, String idNote);
-    void DeleteAllNotes();
+    void updateNote(Notes notes, String idNote);
+    void deleteAllNotes();
 
-    void DeleteSelectionNotes(String idNote);
+    void deleteSelectionNotes(String idNote);
 }
